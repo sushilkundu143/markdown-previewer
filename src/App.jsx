@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import { marked } from 'marked';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [text, setText] = useState('');
+
+  useEffect(() => {
+    // Configure marked
+    marked.setOptions({
+      breaks: true,
+      gfm: true,
+      headerIds: true,
+    });
+  }, []);
+
+  const html = marked.parse(text);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="h-screen grid grid-cols-2 gap-4">
+      <div className="h-full p-4 bg-white">
+        <textarea
+          id="editor"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className="w-full h-full border border-gray-300 bg-gray-300 rounded-lg p-2 resize-none"
+          placeholder="Enter Markdown text here..."
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="h-full p-4 bg-white">
+        <div
+          id="preview"
+          className="h-full border border-gray-400 p-4 bg-gray-300 shadow-md overflow-auto rounded-lg"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
