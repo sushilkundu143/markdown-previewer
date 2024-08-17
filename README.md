@@ -1,7 +1,7 @@
 # Markdown Previewer
 
 ## Objective
-Build an app that is functionally similar to the Markdown Previewer available at [https://markdown-previewer.freecodecamp.rocks/](https://markdown-previewer.freecodecamp.rocks/).
+Build an app that is functionally similar to the Markdown Previewer available at [https://sushilkundu143.github.io/markdown-previewer/](https://sushilkundu143.github.io/markdown-previewer/).
 
 ## User Stories
 1. **Editor Element**: I can see a `<textarea>` element with a corresponding `id="editor"`.
